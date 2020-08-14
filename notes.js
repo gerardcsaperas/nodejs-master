@@ -4,8 +4,6 @@ const chalk = require('chalk');
 const warning = chalk.bold.inverse.yellow;
 const success = chalk.bold.inverse.green;
 
-const getNotes = () => 'Success!';
-
 const addNote = (title, body) => {
     // Retrieve notes file
     const notes = loadNotes();
@@ -51,6 +49,45 @@ const removeNote = (title) => {
     saveNotes(filteredArray);
 };
 
+const listNotes = () => {
+    // Retrieve notes file
+    const notes = loadNotes();
+
+    // If the notes file is an empty array, tell the user...
+    if (notes.length === 0) {
+        console.log(warning('The file is empty.'));
+        return null;
+    }
+
+    // For each note, print its title and an index.
+    notes.map((note, i) => console.log(`${i + 1}. ${note.title}`));
+};
+
+const readNote = (title) => {
+    // Retrieve notes file
+    const notes = loadNotes();
+
+    // If the notes file is an empty array, tell the user...
+    if (notes.length === 0) {
+        console.log(warning('The file is empty...'));
+        return null;
+    }
+
+    // Check if a note with that title exists
+    const noteExists = notes.map((note) => note.title === title).indexOf(true);
+
+    if (noteExists === -1) {
+        console.log(warning('A note with that title does not exist.'));
+        return null;
+    }
+
+    // Find the note we want to read
+    const noteToRead = notes.find((note) => note.title === title);
+
+    console.log(chalk.inverse(noteToRead.title));
+    console.log(noteToRead.body);
+};
+
 const loadNotes = () => {
     try {
         // Read File
@@ -79,7 +116,8 @@ const saveNotes = (notes) => {
 
 // Exports previously declared functions in order to use in other files
 module.exports = {
-    getNotes,
     addNote,
-    removeNote
+    removeNote,
+    listNotes,
+    readNote
 };

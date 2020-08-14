@@ -1,13 +1,11 @@
-// Imports functions and modules
-const chalk = require('chalk');
+// Import functions and modules
 const notes = require('./notes.js');
 const yargs = require('yargs');
-const fs = require('fs');
 
-// Add commands to 'add', 'remove', 'read', and 'list'
-// your text notes
-
-// Create 'add' command for yargs
+// Create	'add' command
+// desc.	Adds a note to a file. Create the file
+//			if it is not yet created.
+//
 // Usage example:
 // $node app.js add --title="Test Note" --body="Test Note's Text"
 yargs.command({
@@ -31,7 +29,9 @@ yargs.command({
     }
 });
 
-// Create 'remove' command
+// Create 	'remove' command
+// desc. 	Removes a note from a file
+//
 // Usage example:
 // $node app.js remove --title="Test Note"
 yargs.command({
@@ -47,18 +47,29 @@ yargs.command({
     handler: (argv) => notes.removeNote(argv.title)
 });
 
-// Create 'list' command
+// Create 	'list' command
+// desc. 	Lists all notes from a file
+//
+// Usage example
+//
 yargs.command({
     command: 'list',
     describe: 'List all notes',
-    handler: () => console.log('Listing notes...')
+    handler: () => notes.listNotes()
 });
 
 // Create 'read' command
 yargs.command({
     command: 'read',
     describe: 'Read a note',
-    handler: () => console.log('Reading a note...')
+    builder: {
+        title: {
+            describe: 'Note title',
+            demandOption: true,
+            type: 'string'
+        }
+    },
+    handler: (argv) => notes.readNote(argv.title)
 });
 
 yargs.parse();
