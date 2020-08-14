@@ -1,22 +1,25 @@
 {
-  "name": "01-notes-app",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/gerardcsaperas/nodejs-master.git"
-  },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/gerardcsaperas/nodejs-master/issues"
-  },
-  "homepage": "https://github.com/gerardcsaperas/nodejs-master#readme",
-  "dependencies": {
-    "validator": "^13.1.1"
-  }
+    "name": "01-notes-app",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "dev": "nodemon app.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/gerardcsaperas/nodejs-master.git"
+    },
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/gerardcsaperas/nodejs-master/issues"
+    },
+    "homepage": "https://github.com/gerardcsaperas/nodejs-master#readme",
+    "dependencies": {
+        "chalk": "^4.1.0",
+        "nodemon": "^2.0.4",
+        "validator": "^13.1.1",
+        "yargs": "^15.4.1"
+    }
 }
