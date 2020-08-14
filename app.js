@@ -1,6 +1,6 @@
 // Imports functions and modules
 const chalk = require('chalk');
-const getNotes = require('./notes.js');
+const notes = require('./notes.js');
 const yargs = require('yargs');
 const fs = require('fs');
 
@@ -25,18 +25,26 @@ yargs.command({
             type: 'string'
         }
     },
-    handler: (argv) =>
-        fs.writeFile(`${argv.title}.txt`, argv.body, (err) => {
-            if (err) throw err;
-            console.log('File successfully written.');
-        })
+    handler: (argv) => {
+        const { title, body } = argv;
+        notes.addNote(title, body);
+    }
 });
 
 // Create 'remove' command
+// Usage example:
+// $node app.js remove --title="Test Note"
 yargs.command({
     command: 'remove',
     describe: 'Remove a new note',
-    handler: () => console.log('Removing a note...')
+    builder: {
+        title: {
+            describe: 'Note title',
+            demandOption: true,
+            type: 'string'
+        }
+    },
+    handler: (argv) => notes.removeNote(argv.title)
 });
 
 // Create 'list' command
