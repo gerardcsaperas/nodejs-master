@@ -51,7 +51,7 @@ yargs.command({
 // desc. 	Lists all notes from a file
 //
 // Usage example
-//
+// $node app.js list
 yargs.command({
     command: 'list',
     describe: 'List all notes',
@@ -59,6 +59,10 @@ yargs.command({
 });
 
 // Create 'read' command
+// desc. 	Reads a note from a file
+//
+// Usage example:
+// $node app.js read --title="Test Note"
 yargs.command({
     command: 'read',
     describe: 'Read a note',
